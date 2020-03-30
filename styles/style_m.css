@@ -1,0 +1,219 @@
+html {
+	box-sizing: border-box
+}
+
+.w3-row-padding img {margin-bottom: 12px}
+.sidebar {width: 230px;background: #222;}
+#main {margin-left: 120px}
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+*,*:before,*:after {
+	box-sizing: inherit
+}
+
+html {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%
+}
+
+body {
+	margin: 0;
+}
+
+
+main,
+nav {
+    display: block;
+    border-right : 1px solid #dddddd;
+    color : white;
+}
+
+a {
+	background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    outline-width: 0;
+    background-color : #008CBA;
+    color : white;
+}
+
+button,
+input {
+	font: inherit;
+	margin: 0;
+	font-weight: bold;
+	overflow: visible
+}
+
+button {
+    text-transform: none;   
+    background-color: #008CBA;
+    text-align : center;
+    display: inline-block;
+    color : white ;
+    border : none;
+    border-radius: 5px;
+    padding : 11px 13px 11px 13px;
+    opacity: 1;
+	cursor: pointer;
+}
+
+button:hover, button.active{
+	background-color:  rgb(115, 204, 118);
+	color: white;
+}
+
+button[type=submit] {
+	-webkit-appearance: button
+}
+
+html,
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	line-height: 1.5
+}
+
+html {
+	overflow-x: hidden
+}
+
+h2 {
+	font-size: 30px
+}
+
+h2 {
+	font-family: "Segoe UI", Arial, sans-serif;
+	font-weight: 400;
+	margin: 10px 0
+}
+
+hr {
+	border: 0;
+	border-top: 1px solid #ddd;
+	margin: 20px 0;
+	width:250px;
+} 
+
+img {
+	vertical-align: middle
+}
+
+input {
+	padding : 20px;
+	width: 60%;
+	font-family: 'Montserrat', sans-serif;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 3px;
+    height: 25px;
+    border : 1px solid #03769c;
+}
+
+input:hover, input:focus, input.active{
+	box-shadow: 0 0 5px #03769c;
+    border : 1px solid #03769c;
+	outline: none;
+  }
+
+.sidebar {
+	height: 100%;
+	width: 250px;
+	background-color: #222222;
+	position: fixed;
+	z-index: 1;
+	overflow: auto
+}
+
+#main {
+	transition: margin-left .4s
+}
+
+.bar-item {
+	padding: 8px 16px;
+	float: left;
+}
+
+.bar-block .bar-item {
+	width: 100%;
+	display: block;
+	padding: 8px 16px;
+	text-align: left;
+	border: none;
+	white-space: normal;
+	float: none;
+	outline: 0
+}
+
+
+@media (max-width:600px) {
+	.small {
+		display: none
+	}
+}
+
+@media (min-width:993px) {
+	.content {
+		width: 900px
+	}
+
+	.large {
+		display: none;
+	}
+
+	.sidebar {
+
+	}
+}
+
+@media (max-width:992px) and (min-width:601px) {
+	.medium {
+		display: none
+	}
+}
+
+@media (max-width:992px) {
+	.sidebar {
+		display: none
+	}
+}
+
+.padding-large {
+	padding: 12px 24px
+}
+
+.padding-16 {
+	padding-top: 16px;
+	padding-bottom: 16px
+}
+
+.contenu {
+	padding-top: 20px;
+    padding-bottom: 64px;
+    margin-left:150px;
+}
+
+.actif {
+	color: #ffffff;
+	background-color: rgb(2, 115, 153);;
+}
+
+
+.buttom_color {
+	color: #000;
+	background-color: #f1f1f1;}
+
+.ligne td,th{ 
+	width: 150px; 
+	text-align: center; 
+	border: 0;
+	padding: 5px;
+	}
+
+.ligne td{
+		border-top: 1px solid; 
+	}	
+a{ cursor: pointer;}
+	

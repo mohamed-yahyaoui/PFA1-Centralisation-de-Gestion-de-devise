@@ -1,0 +1,95 @@
+body{
+  margin: 0 ;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+}
+#glob{
+margin: 0px;
+min-height:700px;
+max-width : 100%;
+background-image: url("../sources/bb.png");
+background-size: cover;
+opacity: 1;
+
+}
+
+.contenu{
+
+width: 40%;
+min-height: 700px;
+float: right; 
+background-image: url("../sources/b1.png"); 
+}
+
+.contenu h1{
+  color: #03769c;
+  padding: 18% 0 0 2%;
+}
+
+.contenu button 
+{
+background-color: #008CBA;
+padding : 2% 5%;
+text-align : center;
+display: inline-block;
+color : white ;
+border : none;
+border-radius: 10px;
+padding : 7px 9px 7px 9px;
+opacity: 1;
+font-size: large;
+font-family: 'Montserrat', sans-serif;
+cursor: pointer;
+}
+.contenu button:hover, button:disabled{
+background-color:  rgb(115, 204, 118);
+color: white;
+}
+.contenu form
+{
+  padding-top: 1px;
+  padding-left: 3%;
+}
+.contenu label
+{
+  color: #008CBA;
+  font-size: x-large;
+  
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+-moz-appearance:textfield;
+}
+.contenu input
+{   font-family: 'Montserrat', sans-serif;
+  border-radius: 4px;
+  opacity: 0.75;
+  text-indent: 5px;
+  font-size: large;
+  overflow: hidden;
+  margin-top: 3px;
+  height: 25px;
+  border : 1px solid #03769c;
+  border-radius:50px;
+}
+.contenu input:hover, input:active, input:focus{
+  box-shadow: 0 0 5px #03769c;
+  border : 1px solid #03769c;
+  outline : none; 
+}
+
+.contenu a{
+  color: #008CBA;
+  font-size:larger;
+  font-weight:bold;
+}
+
+.contenu a:hover, a.visited{
+   color :rgb(115, 204, 118);
+}

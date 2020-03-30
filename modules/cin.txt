@@ -1,0 +1,28 @@
+function change(color,input){
+  $(input).css("box-shadow", "0 0 5px "+color);
+  $(input).css("border", "1px solid "+color);
+}
+
+e = 'input[name="ci"]';
+
+$(document).ready(function(){
+ $(e).change(function () {  
+   val=$(e).val();
+   if(val.length!=8 || isNaN(val)){
+    change("red",e);
+    $('#button').prop('disabled', true);
+    if ($("i").length==0){
+      $("</br><b style='color:red;'>CIN doit composé exactement de 8 chiffres !!!</b>").insertAfter(e);
+      }
+    else{
+          $("b").replaceWith("<b style='color:red;'>CIN doit composé exactement de 8 chiffres !!!</b>");
+      }
+  }
+  else{
+    if ($("i").length!=0){
+    change("green",e);
+    $('#button').prop('disabled', false);
+    $("b").replaceWith("<b style='color:green;'>Votre CIN est correcte!!!</b>");
+  }}
+ })
+});

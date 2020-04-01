@@ -60,7 +60,7 @@ button {
 	cursor: pointer;
 }
 
-button:hover, button.active{
+button:hover, button.active, button:disabled{
 	background-color:  rgb(115, 204, 118);
 	color: white;
 }

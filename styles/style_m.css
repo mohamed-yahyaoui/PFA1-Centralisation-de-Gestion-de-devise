@@ -216,4 +216,14 @@ input:hover, input:focus, input.active{
 		border-top: 1px solid; 
 	}	
 a{ cursor: pointer;}
-	
+
+#msg1{
+  color : green;  
+  font-size : 14px;
+}
+
+#msg2{
+	color : red;
+	font-size : 14px;  
+  }
+

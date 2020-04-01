@@ -30,7 +30,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- CIN -->
+<!-- CIN >-->
 <script src="modules/cin.js"></script>
 </head>
 
@@ -90,7 +90,7 @@
     <p>S'il vous plaît remplissez les champs ci dessous</p>
 
     <form action="mpass.php" method="POST">
-    <p><input class="input" type="text" name="cin" placeholder="&#8470; de la carte d'identité national" ></p>
+    <p><input class="input" oninvalid="this.setCustomValidity('fbs')" oninput="setCustomValidity('')" type="text" pattern="[0-9]{8}" name="cin" placeholder="&#8470; de la carte d'identité national" ></p>
       <p><input class="input " type="password" name="anpas" placeholder="Ancien mot de passe"></p>
 	  <p><input class="input " type="password" name="npas" placeholder="Nouveau mot de passe"></p>
 	   <p><input class="input " type="password" name="cnpas" placeholder="Confirmer votre nouveau mot de passe"></p>

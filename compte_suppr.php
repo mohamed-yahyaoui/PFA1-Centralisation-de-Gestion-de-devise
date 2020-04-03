@@ -37,29 +37,29 @@ $_SESSION['ouvert']=1;
 <body>
 
 
-<nav class="sidebar bar-block  small center">
- 
-  <img src="sources/BCT-Logo-780x405.jpg" style="width:100%">
-  <a href="compte.php"class="bar-item padding-large ">
-   
-    <p>Les comptes existants</p>
-  </a>
-  <a href="compte_ajout.php" class="bar-item padding-large">
-   
-    <p>Ajouter un compte</p>
-  </a>
-  <a  class="bar-item padding-large actif ">
-  
-    <p>Supprimer un compte</p>
-  </a>
-  <a href="mpass.php" class="bar-item padding-large  ">
-  
+<nav class="sidebar">
+
+<img src="sources/BCT-Logo-780x405.jpg" style="width:100%">
+<a href="compte.php">
+
+  <p>Les comptes existants</p>
+</a>
+<a href="compte_ajout.php">
+
+  <p>Ajouter un compte</p>
+</a>
+<a class="actif">
+
+  <p>Supprimer un compte</p>
+</a>
+<a href="mpass.php">
+
   <p>Modifier mon mot de passe</p>
-  </a>
-  <a onclick="confirm()" class="bar-item padding-large ">
-   
-    <p>Déconnexion</p>
-  </a>
+</a>
+<a onclick="confirm()">
+
+  <p>Déconnexion</p>
+</a>
 </nav>
 
 
@@ -73,7 +73,7 @@ $_SESSION['ouvert']=1;
   </div>
 </div>
 
-<div class="padding-large" id="main">
+<div id="main">
 
 <?php include 'modules/supp.php';?> 
 
@@ -86,9 +86,9 @@ $_SESSION['ouvert']=1;
 
 
 <form action="compte_suppr.php" method="POST">
-  <p><input class="input" type="text" name="cin" placeholder="&#8470; de la carte d'identité national"></p>
+  <p><input type="number" name="cin" placeholder="&#8470; de la carte d'identité national"></p>
   
-    <button class="button" type="submit" name="submit">
+    <button type="submit" name="submit">
       Supprimer
     </button>
   </p>

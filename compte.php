@@ -41,29 +41,29 @@ border-radius: 20px;
 <body>
 
 
-<nav class="sidebar bar-block  small center">
- 
-  <img src="sources/BCT-Logo-780x405.jpg" style="width:100%">
-  <a class="bar-item padding-large actif">
-   
-    <p>Les comptes existants</p>
-  </a>
-  <a href="compte_ajout.php" class="bar-item padding-large">
-   
-    <p>Ajouter un compte</p>
-  </a>
-  <a href="compte_suppr.php" class="bar-item padding-large  ">
-  
-    <p>Supprimer un compte</p>
-  </a>
-  <a href="mpass.php" class="bar-item padding-large  ">
-  
+<nav class="sidebar">
+
+<img src="sources/BCT-Logo-780x405.jpg" style="width:100%">
+<a class="actif">
+
+  <p>Les comptes existants</p>
+</a>
+<a href="compte_ajout.php">
+
+  <p>Ajouter un compte</p>
+</a>
+<a href="compte_suppr.php">
+
+  <p>Supprimer un compte</p>
+</a>
+<a href="mpass.php">
+
   <p>Modifier mon mot de passe</p>
-  </a>
-  <a onclick="confirm()" class="bar-item padding-large ">
-   
-    <p>Déconnexion</p>
-  </a>
+</a>
+<a onclick="confirm()">
+
+  <p>Déconnexion</p>
+</a>
 </nav>
 
 
@@ -77,10 +77,10 @@ border-radius: 20px;
   </div>
 </div>
 
-<div class="padding-large" id="main">
+<div id="main">
  
 <div class="contenu">
-  <input class="input" type="text" placeholder="Recheche ..." name="rech">
+  <input type="text" placeholder="Recheche ..." name="rech">
 
 
   <?php

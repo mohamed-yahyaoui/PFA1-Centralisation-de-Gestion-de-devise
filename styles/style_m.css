@@ -1,42 +1,32 @@
 html {
-	box-sizing: border-box
-}
-
-.w3-row-padding img {margin-bottom: 12px}
-.sidebar {width: 230px;background: #222;}
-#main {margin-left: 120px}
-@media only screen and (max-width: 600px) {#main {margin-left: 0}}
-*,*:before,*:after {
-	box-sizing: inherit
-}
-
-html {
+	box-sizing: border-box;
 	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%
+	-webkit-text-size-adjust: 100%;
+	overflow-x: hidden;
 }
 
 body {
 	margin: 0;
 }
 
-
-main,
-nav {
-    display: block;
-    border-right : 1px solid #dddddd;
-    color : white;
+html,
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+	line-height: 1.5
 }
 
 a {
 	background-color: transparent;
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 a:hover {
-    outline-width: 0;
-    background-color : #008CBA;
-    color : white;
+	outline-width: 0;
+	background-color: #008CBA;
+	color: white;
 }
 
 button,
@@ -48,20 +38,22 @@ input {
 }
 
 button {
-    text-transform: none;   
-    background-color: #008CBA;
-    text-align : center;
-    display: inline-block;
-    color : white ;
-    border : none;
-    border-radius: 5px;
-    padding : 11px 13px 11px 13px;
-    opacity: 1;
+	text-transform: none;
+	background-color: #008CBA;
+	text-align: center;
+	display: inline-block;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 11px 13px 11px 13px;
+	opacity: 1;
 	cursor: pointer;
 }
 
-button:hover, button.active, button:disabled{
-	background-color:  rgb(115, 204, 118);
+button:hover,
+button.active,
+button:disabled {
+	background-color: rgb(115, 204, 118);
 	color: white;
 }
 
@@ -69,22 +61,8 @@ button[type=submit] {
 	-webkit-appearance: button
 }
 
-html,
-body {
-	font-family: 'Montserrat', sans-serif;
-	font-size: 15px;
-	line-height: 1.5
-}
-
-html {
-	overflow-x: hidden
-}
-
 h2 {
-	font-size: 30px
-}
-
-h2 {
+	font-size: 30px;
 	font-family: "Segoe UI", Arial, sans-serif;
 	font-weight: 400;
 	margin: 10px 0
@@ -94,29 +72,31 @@ hr {
 	border: 0;
 	border-top: 1px solid #ddd;
 	margin: 20px 0;
-	width:250px;
-} 
+	width: 250px;
+}
 
 img {
 	vertical-align: middle
 }
 
 input {
-	padding : 20px;
+	padding: 20px;
 	width: 60%;
 	font-family: 'Montserrat', sans-serif;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-top: 3px;
-    height: 25px;
-    border : 1px solid #03769c;
+	border-radius: 4px;
+	overflow: hidden;
+	margin-top: 3px;
+	height: 25px;
+	border: 1px solid #03769c;
 }
 
-input:hover, input:focus, input.active{
+input:hover,
+input:focus,
+input.active {
 	box-shadow: 0 0 5px #03769c;
-    border : 1px solid #03769c;
+	border: 1px solid #03769c;
 	outline: none;
-  }
+}
 
 .sidebar {
 	height: 100%;
@@ -124,19 +104,13 @@ input:hover, input:focus, input.active{
 	background-color: #222222;
 	position: fixed;
 	z-index: 1;
-	overflow: auto
+	overflow: auto;
+	display: block;
+	border-right: 1px solid #dddddd;
+	color: white;
 }
 
-#main {
-	transition: margin-left .4s
-}
-
-.bar-item {
-	padding: 8px 16px;
-	float: left;
-}
-
-.bar-block .bar-item {
+.sidebar a {
 	width: 100%;
 	display: block;
 	padding: 8px 16px;
@@ -147,11 +121,24 @@ input:hover, input:focus, input.active{
 	outline: 0
 }
 
+#main {
+	margin-left: 120px;
+	transition: margin-left .4s;
+	padding: 12px 24px;
+}
 
-@media (max-width:600px) {
-	.small {
-		display: none
+@media (max-width:600px) {}
+
+@media only screen and (max-width: 600px) {
+	#main {
+		margin-left: 0
 	}
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit
 }
 
 @media (min-width:993px) {
@@ -163,9 +150,7 @@ input:hover, input:focus, input.active{
 		display: none;
 	}
 
-	.sidebar {
-
-	}
+	.sidebar {}
 }
 
 @media (max-width:992px) and (min-width:601px) {
@@ -180,50 +165,27 @@ input:hover, input:focus, input.active{
 	}
 }
 
-.padding-large {
-	padding: 12px 24px
-}
-
-.padding-16 {
-	padding-top: 16px;
-	padding-bottom: 16px
-}
-
 .contenu {
 	padding-top: 20px;
-    padding-bottom: 64px;
-    margin-left:150px;
+	padding-bottom: 64px;
+	margin-left: 150px;
 }
 
 .actif {
 	color: #ffffff;
-	background-color: rgb(2, 115, 153);;
+	background-color: rgb(2, 115, 153);
+	;
 }
 
 
-.buttom_color {
-	color: #000;
-	background-color: #f1f1f1;}
-
-.ligne td,th{ 
-	width: 150px; 
-	text-align: center; 
+.ligne td,
+th {
+	width: 150px;
+	text-align: center;
 	border: 0;
 	padding: 5px;
-	}
-
-.ligne td{
-		border-top: 1px solid; 
-	}	
-a{ cursor: pointer;}
-
-#msg1{
-  color : green;  
-  font-size : 14px;
 }
 
-#msg2{
-	color : red;
-	font-size : 14px;  
-  }
-
+.ligne td {
+	border-top: 1px solid;
+}

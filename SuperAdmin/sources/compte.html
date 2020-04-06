@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<title>compte bank</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="bank.css">
+<link rel="stylesheet" href="aaaa.css">
+<body class="background_col">
+
+
+<nav class="sidebar bar-block  small center">
+ 
+  <img src="ban.jpg" style="width:100%">
+  <a  class="bar-item button padding-large background_col">
+   
+    <p>Les comptes existants</p>
+  </a>
+  <a href="compte_ajout.html" class="bar-item button padding-large  ">
+   
+    <p>Ajouter un compte</p>
+  </a>
+  <a href="compte_suppr.html" class="bar-item button padding-large  ">
+  
+    <p>supprimer un compte</p>
+  </a>
+  <a  href="compte.html" class="bar-item button padding-large  ">
+ 
+    <p>deconnection</p>
+  </a>
+</nav>
+
+
+<div class="top large medium" id="myNavbar">
+  <div class=" background_col  center ">
+    <a  class="bar-item button" style="width:25%  ">Les comptes existants</a>
+    <a href="compte_ajout.html" class="bar-item button" style="width:25% ">Ajouter un compte</a>
+    <a href="compte_suppr.html" class="bar-item button" style="width:25%  ">supprimer un compte</a>
+    <a href="compte.html" class="bar-item button" style="width:25%  ">deconnection</a>
+  </div>
+</div>
+
+
+<div class="padding-large" style="padding:30px 24px" id="main">
+  
+  <header class=" center background_col" >
+   <br> <h2 > Les comptes existants:</h2>
+	
+  </header>
+<footer class=" center background_col">
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=centralisation", $username, $password);
+    // set the PDO error mode to exception
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connection réussite";
+    }
+catch(PDOException $e)
+    {
+    echo "Connection interrompue s'il vous plais essayer une autre fois: ";
+    }
+?>
+</footer>
+ 
+  
+  
+   
+ 
+
+
+</div>
+
+</body>
+</html>

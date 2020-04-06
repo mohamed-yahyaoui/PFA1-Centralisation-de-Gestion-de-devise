@@ -1,0 +1,113 @@
+.btn {
+    background-color:#1c1a66;
+    border: none;
+    color: white;
+    padding: 25px 3px;
+    padding-right: 120px;
+    font-size: 25px;
+    cursor: pointer;
+    
+    margin-top:-2%;
+    transition-duration: 0.4s;
+}
+.btn:hover 
+{
+    background-color: #03769c;
+    color: white;
+    cursor: pointer;
+    /*font-size: 37px;*/
+}
+table 
+{
+    /*border-collapse: collapse;*/
+    border-spacing: 0;
+    width: 40%;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 7%;
+}
+  
+td 
+{
+    text-align: left;
+    padding: 6px;
+}
+  
+tr:nth-child(even) 
+{
+    background-color: #f2f2f2;
+    opacity: 0.8;
+}
+body
+{
+    margin-left: 0%;
+    margin-top:0%;
+    margin-right: 0%;
+    margin-bottom: 0%;
+    background-image: url(bb.png);
+    height: 100%;
+}
+#fdiv
+{
+  
+    background-image: url(b1.png);
+    padding-top: 0px;
+    margin-left: 0;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    height: 100%;
+}
+#droite
+{
+    height:100%;
+    width: 70%;
+    float: right;
+}
+#gauche
+{
+    background-color: #1c1a66;
+    border-right: solid 10px #03769c;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+    margin-top:2.5%;
+    height: 90%;
+    width: 20%;
+    float: left;
+    
+}
+
+#tit
+{
+    margin-top: -2.5px;
+    margin-bottom: 0%;
+    color:#0b5872;
+}
+#tit2
+{
+    margin-top: -2.5px;
+    /*margin-bottom: 5%;*/
+    color:#0b5872;
+}
+.barr
+{
+    opacity: 0.7;
+    border-radius: 10px;
+    width:50%;
+    height: 25px;
+}
+#button 
+{
+    background-color:cadetblue;
+    font-size: larger;
+    text-align : center;
+    color : white ;
+    border : none;
+    border-radius: 7px;
+    opacity: 1;
+    transition-duration: 0.4s;
+}
+#button:hover 
+{
+    background-color: rgb(115, 204, 118);
+    color: white;
+    cursor: pointer;
+}

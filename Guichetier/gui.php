@@ -40,8 +40,26 @@ else
 ?>
  <html style="height:100%">
     <head>
+    <script>
+function imprimer(divName) {
+
+      var printContents = document.getElementById(divName).innerHTML;    
+   var originalContents = document.body.innerHTML; 
+   //document.body.style.backgroundImage = "url('b1.png')";  
+   document.getElementById(divName).style.margin = "500px 200px";  
+   
+   document.getElementById("fdiv").innerHTML = printContents;  
+   window.print();     
+   document.body.innerHTML = originalContents;
+   }
+   
+</script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
         <style>
+            #sectionAimprimer
+            {
+                margin:0 auto;
+            }
         .alertify-notifier .ajs-message.ajs-success {background: #03769c ;color:white;height:60px;text-align:center;font-size:30px;}
         </style>
         <style>
@@ -182,7 +200,7 @@ else
                                     $tux=NULL;
                                     $t = date("Y-m-d H:i:s");
                                     //$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
-									$f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
+									//$f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
                                     switch($sel)
                                     {
                                         
@@ -205,10 +223,30 @@ else
                                     echo"<h2 id=tit>";
                                         $quota=round($quota,2);
                                     echo "Nouveau Quota Disponible: \"".$quota."\"</br> ";
-                                    echo "</h2>";
-                                    
 
+                                    echo "</h2>";
+                                    echo "<button id=button onClick=\"imprimer('sectionAimprimer')\"><i class=\"fa fa-print\" style=\"margin-top:2px;\"> Imprimer</i></button>";
+                                    echo"<div id=sectionAimprimer>
+                                    <h1>ID Client :".$c."</h1>";
+                                    
+                //N_tr Montant devise date_tr
+                                    $req=$base->query("SELECT * FROM transcrire WHERE Montant !='0' and cin='$c' and date_tr like '$dtr%';");
+                                    echo "<table border=1 style=\"width:100%;radius:0%;\">";
+                                    echo"<tr><th>N° de transaction</th><th>Montant</th><th>Devise</th><th>Date de transaction</th></tr>";
+                                    foreach($req as $row)
+                                    {
+                                        echo "<tr>";
+                                        echo "<td>".$row['N_tr']."</td>";
+                                        echo "<td>".$row['Montant']."</td>";
+                                        echo "<td>".$row['devise']."</td>";
+                                        echo "<td>".$row['date_tr']."</td>";
+                                        echo "</tr>";
+                                    }
+                                    echo "</table>";
+                            
+                                    echo"</div>";
                                 }
+
                                 else
                                 {
                                     echo "<h2 style=\"color:red;\">Transaction échouée !</h2>";
@@ -238,7 +276,7 @@ else
                             {
                                 $_SESSION['ci']=$_POST['ci'];$w=$_POST['na'];$l=$_POST['pna'];$temp = date("Y-m-d H:i:s");$c=$_SESSION['ci'];
                                 //echo$w;
-                                $m=$base->query("INSERT INTO client VALUES('$c','$w','$l','$temp');");
+                                $m=$base->query("INSERT INTO client VALUES('$c','$w','$l');");
                                 echo "<script>var x=document.getElementById(\"fr\").style.display=\"none\";</script> ";
                                 //echo "<h2 style=\"color:green;\">Client ajouté avec succés</h2> ";
                                 echo "<script>alertify.success('Client ajouté avec succes');</script>"; 
@@ -293,6 +331,7 @@ else
                                         if(isset($_POST['sel'])&& isset($_POST['m'])  )
                                         {
                                             $c=$_POST['ci'];
+                                            
                                             $sel=$_POST['sel'];
                                             $quota=$l - $_POST['m'];
                                             $mon=$_POST['m'];
@@ -301,7 +340,7 @@ else
                                                 $tux=NULL;
                                                 $t = date("Y-m-d H:i:s");
                                                 //$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
-                                                $f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
+                                                //$f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
                                                 switch($sel)
                                                 {
                                                     
@@ -326,6 +365,26 @@ else
                                                     echo "Nouveau Quota Disponible: \"".$quota."\"</br> ";
                                                     echo "</h2>";
                                                 }
+                                                echo "<button id=button onClick=\"imprimer('sectionAimprimer')\"><i class=\"fa fa-print\" style=\"margin-top:2px;\"> Imprimer</i></button>";
+                                    echo"<div id=sectionAimprimer>
+                                    <h1>ID Client :".$c."</h1>";
+                                    
+                //N_tr Montant devise date_tr
+                                    $req=$base->query("SELECT * FROM transcrire WHERE Montant !='0' and cin='$c' and date_tr like '$dtr%';");
+                                    echo "<table border=1 style=\"width:100%;radius:0%;\">";
+                                    echo"<tr><th>N° de transaction</th><th>Montant</th><th>Devise</th><th>Date de transaction</th></tr>";
+                                    foreach($req as $row)
+                                    {
+                                        echo "<tr>";
+                                        echo "<td>".$row['N_tr']."</td>";
+                                        echo "<td>".$row['Montant']."</td>";
+                                        echo "<td>".$row['devise']."</td>";
+                                        echo "<td>".$row['date_tr']."</td>";
+                                        echo "</tr>";
+                                    }
+                                    echo "</table>";
+                            
+                                    echo"</div>";
             
                                             }
                                             else
@@ -346,7 +405,7 @@ else
                 }
                 $base->query("DELETE FROM transcrire WHERE  N_tr > ALL (SELECT N_tr FROM transcrire);");
                 ?>
-        
+            
             
         </div>
     </body>

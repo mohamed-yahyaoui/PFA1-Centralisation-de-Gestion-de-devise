@@ -109,8 +109,8 @@ else
                 if(isset($_POST['ci']) || isset($_POST['b']) )
                 {
                     echo "<h1 id=tit2>Infos du Passager</h1> ";
-                    $_SESSION['ci']=$_POST['ci'];
-                    $c=$_SESSION['ci'];
+                    $c=$_POST['ci'];
+                    
                     function existc($c)
                     {
                         global $base;
@@ -145,8 +145,8 @@ else
                         echo"<table >";
                         foreach($h as $row)
                         {      
-                            echo "<tr><td ><h3 id=tit2 >Prenom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
-                            echo "<tr><td ><h3 id=tit2 >Nom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
+                            echo "<tr><td ><h3 id=tit2 >Nom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
+                            echo "<tr><td ><h3 id=tit2 >Prenom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
                             echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >".round($quota,2)."</td></tr> ";
                         
                         }  
@@ -263,8 +263,8 @@ else
                                     $h=$base->query("SELECT * FROM client where cin='$c';");
                                     foreach($h as $row)
                                     {      
-                                        echo "<tr><td ><h3 id=tit2 >Prenom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
-                                        echo "<tr><td ><h3 id=tit2 >Nom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
+                                        echo "<tr><td ><h3 id=tit2 >Nom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
+                                        echo "<tr><td ><h3 id=tit2 >Prenom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
                                         echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >".$quota."</td></tr> ";
                                     
                                     }  

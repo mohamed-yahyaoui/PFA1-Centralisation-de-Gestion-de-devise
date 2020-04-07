@@ -16,7 +16,22 @@ echo "";
 } 
 if (isset($_SESSION['idd']) && isset($_SESSION['pass']))
 {
+    
     $i=$_SESSION['idd'];$p=$_SESSION['pass'];
+    
+    //////////////////////////////////////////
+   /* if ($da == "01-01 00:00:00")
+    {
+        foreach ($mon as $r)
+        {
+            $r['Montant']=0;
+            
+        }   
+        echo $r['Montant'];
+        
+        $up=$base->query("UPDATE transcrire SET Montant = '0';");
+    }*/
+    /////////////////////////////////////////////
 }
 else
 {
@@ -110,34 +125,40 @@ else
                     
                     $h=$base->query("SELECT * FROM client where cin='$c';");
                     if(existc($c)==1)
-                    {   echo"<table >";
+                    {
+                        $dtr=date("Y");
+                        
+                        $sup=$base->query("SELECT SUM(Montant) FROM transcrire WHERE cin='$c' and date_tr LIKE '$dtr%';");
+                        
+                        foreach($sup as $r)
+                        {
+                            $quota=6000-$r['SUM(Montant)'];
+                        }
+    
+                        
+                        $up=$base->query("INSERT INTO transcrire(cin,idg,Montant)VALUES('$c',$i,'0');");
+                        $ntr=$base->query("SELECT MAX(N_tr) FROM transcrire;");
+                        foreach($ntr as $f)
+                        {
+                            $nt=$f['MAX(N_tr)'];
+                        }
+                        echo"<table >";
                         foreach($h as $row)
                         {      
                             echo "<tr><td ><h3 id=tit2 >Prenom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
                             echo "<tr><td ><h3 id=tit2 >Nom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
-                            echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >".$row['quota_dispo']."</td></tr> ";
+                            echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >".round($quota,2)."</td></tr> ";
                         
                         }  
                         echo"</table>";
-                        function quota()
-                        {
-                            global $c,$base;
-                            $ch=$base->query("SELECT * FROM client where cin='$c';");
-                            foreach($ch as $row)
-                            {
-                                
-                                return $row['quota_dispo'];
-                            }
-                            
-                        }
-                        $l=quota();
+                        $l=$quota;
                         
                         //var_dump($p); 
                         echo "<form method=POST>
                         <label for=rech><h1 id=tit>Effectuer la transaction</h1></label></br>";?>
                         <input type=hidden class=barr id=rech name=ci value="<?php echo $c ?>">
                         <?php
-                        echo"<input type=number class=barr id=rech name=m placeholder=\"Entrer la somme à transcrire\" autocomplete=off></br>
+                        echo"<input type=number step=0.01 class=barr id=rech name=m placeholder=\"Entrer la somme à transcrire\" autocomplete=off></br>
                         <select size=1 class=barr name=sel>
                         <option selected>EURO</option>
                         <option>DOLAR USA</option>
@@ -154,12 +175,13 @@ else
                             {
                                 $c=$_POST['ci'];
                                 $sel=$_POST['sel'];
-                                $q=$l - $_POST['m'];
+                                $quota=$l - $_POST['m'];
                                 $mon=$_POST['m'];
-                                if($q>=0 && ($_POST['m'])>=0)
+                                if($quota>=0 && ($_POST['m'])>=0)
                                 {
                                     $tux=NULL;
-                                    $t = date("Y-m-d H:i:s");$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
+                                    $t = date("Y-m-d H:i:s");
+                                    //$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
 									$f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
                                     switch($sel)
                                     {
@@ -171,20 +193,20 @@ else
                                         case 'DOLLAR CANADIEN':$tux=1/2.0613;break;
                                         
                                     }
-                                    
-                                    $k=$base->query("INSERT INTO transcrire(cin,idg,devise,taux,date_tr)VALUES('$c',$i,'$sel','$tux','$t');");
+                                    //$base->query("DELETE FROM transcrire WHERE  Montant=0;");
+                                    $k=$base->query("UPDATE transcrire set Montant='$mon' ,devise='$sel',taux='$tux',date_tr='$t' WHERE N_tr=$nt-1;");
                                     //$k=$base->query("UPDATE transcrire set taux='$tux' where cin='$c';");
                                     //header("Refresh:0; url=gui.php");
                                     echo "<h2 style=\"color:green;\">Transaction éffectué avec succés</h2> ";
                                     $gg=round($tux*$mon,2);
                                     echo "<h3 id=tit>Le montant transcrit: $gg $sel </h2> ";
-                                    $h=$base->query("SELECT * FROM client where cin='$c';");
-                                    foreach($h as $row)
-                                    {      echo"<h2 id=tit>";
-                                        
-                                        echo "Nouveau Quota Disponible: \"".$row['quota_dispo']."\"</br> ";
-                                        echo "</h2>";
-                                    }
+                                    
+                                    
+                                    echo"<h2 id=tit>";
+                                        $quota=round($quota,2);
+                                    echo "Nouveau Quota Disponible: \"".$quota."\"</br> ";
+                                    echo "</h2>";
+                                    
 
                                 }
                                 else
@@ -216,105 +238,113 @@ else
                             {
                                 $_SESSION['ci']=$_POST['ci'];$w=$_POST['na'];$l=$_POST['pna'];$temp = date("Y-m-d H:i:s");$c=$_SESSION['ci'];
                                 //echo$w;
-                                $m=$base->query("INSERT INTO client VALUES('$c','$w','$l',6000,'$temp');");
+                                $m=$base->query("INSERT INTO client VALUES('$c','$w','$l','$temp');");
                                 echo "<script>var x=document.getElementById(\"fr\").style.display=\"none\";</script> ";
                                 //echo "<h2 style=\"color:green;\">Client ajouté avec succés</h2> ";
                                 echo "<script>alertify.success('Client ajouté avec succes');</script>"; 
                                 //header("Refresh:0;url=gui.php");
                                 if(existc($c)==1)
-                    {   echo"<table >";
-                        
-                              
-                            echo "<tr><td ><h3 id=tit2 >Prenom: </td>"; echo"<td><h3 id=tit2 >". $w."</h3></td></tr> ";
-                            echo "<tr><td ><h3 id=tit2 >Nom: </td><td><h3 id=tit2 >".$l."</h3></td></tr> ";
-                            echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >6000</td></tr> ";
-                        
-                        
-                        echo"</table>";
-                        function quota()
-                        {
-                            global $c,$base;
-                            $ch=$base->query("SELECT * FROM client where cin='$c';");
-                            foreach($ch as $row)
-                            {
-                                
-                                return $row['quota_dispo'];
-                            }
-                            
-                        }
-                        $l=quota();
-                        
-                        //var_dump($p); 
-                        echo "<form method=POST>
-                        <label for=rech><h1 id=tit>Effectuer la transaction</h1></label></br>";?>
-                        <input type=hidden class=barr id=rech name=ci value="<?php echo $c ?>">
-                        <?php
-                        echo"<input type=number class=barr id=rech name=m placeholder=\"Entrer la somme à transcrire\" autocomplete=off></br>
-                        <select size=1 class=barr name=sel>
-                        <option selected>EURO</option>
-                        <option>DOLAR USA</option>
-                        <option>YUAN CHINOIS</option>
-                        <option>LIVRE STERLING</option>
-                        <option>DOLLAR CANADIEN</option>
-                        </select></br>
-                        <input type=submit id=button value=Transcrire name=tr>
-                        </form>";
-                    
-                        if(isset($_POST['tr']) )
-                        {
-                            if(isset($_POST['sel'])&& isset($_POST['m']))
-                            {
-                                $c=$_POST['ci'];
-                                $sel=$_POST['sel'];
-                                $q=$l - $_POST['m'];
-                                $mon=$_POST['m'];
-                                if($q>=0)
                                 {
-                                    $tux=NULL;
-                                    $t = date("Y-m-d H:i:s");$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
-									$f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
-                                    switch($sel)
-                                    {
-                                        
-                                        case 'EURO':$tux= 1/3.1814 ;break;
-                                        case 'DOLAR USA':$tux=1/2.8260;break;
-                                        case 'YUAN CHINOIS':$tux=1/0.4075;break;
-                                        case 'LIVRE STERLING':$tux=1/3.5932;break;
-                                        case 'DOLLAR CANADIEN':$tux=1/2.0613;break;
-                                        
-                                    }
+                                    $sup=$base->query("SELECT SUM(Montant) FROM transcrire WHERE cin='$c';");
                                     
-                                    $k=$base->query("INSERT INTO transcrire(cin,idg,devise,taux,date_tr)VALUES('$c',$i,'$sel','$tux','$t');");
-                                    //$k=$base->query("UPDATE transcrire set taux='$tux' where cin='$c';");
-                                    //header("Refresh:0; url=gui.php");
-                                    echo "<h2 style=\"color:green;\">Transaction éffectué avec succés</h2> ";
-                                    $gg=round($tux*$mon,2);
-                                    echo "<h3 id=tit>Le montant transcrit: $gg $sel </h2> ";
+                                    foreach($sup as $r)
+                                    {
+                                        $quota=6000-$r['SUM(Montant)'];
+                                    }
+                                
+                                    
+                                    $upp=$base->query("INSERT INTO transcrire(cin,idg,Montant)VALUES('$c',$i,'0');");
+                                    $ntr=$base->query("SELECT MAX(N_tr) FROM transcrire;");
+                                    foreach($ntr as $f)
+                                    {
+                                        $nt=$f['MAX(N_tr)'];
+                                    }
+                                    echo"<table >";
                                     $h=$base->query("SELECT * FROM client where cin='$c';");
                                     foreach($h as $row)
-                                    {      echo"<h2 id=tit>";
-                                        
-                                        echo "Nouveau Quota Disponible: \"".$row['quota_dispo']."\"</br> ";
-                                        echo "</h2>";
-                                    }
-
-                                }
-                                else
-                                {
-                                    echo "<h2 style=\"color:red;\">Transaction échouée !</h2>";
-
-                                }
+                                    {      
+                                        echo "<tr><td ><h3 id=tit2 >Prenom: </td>"; echo"<td><h3 id=tit2 >". $row['nom_c']."</h3></td></tr> ";
+                                        echo "<tr><td ><h3 id=tit2 >Nom: </td><td><h3 id=tit2 >".$row['prenom_c']."</h3></td></tr> ";
+                                        echo "<tr><td ><h3 id=tit2 >Quota Disponible: </td><td><h3 id=tit2 >".$quota."</td></tr> ";
+                                    
+                                    }  
+                                    echo"</table>";
+                                    
+                                    $l=$quota;
+                                    
+                                    //var_dump($p); 
+                                    echo "<form method=POST>
+                                    <label for=rech><h1 id=tit>Effectuer la transaction</h1></label></br>";?>
+                                    <input type=hidden class=barr id=rech name=ci value="<?php echo $c ?>">
+                                    <?php
+                                    echo"<input type=number class=barr id=rech name=m placeholder=\"Entrer la somme à transcrire\" autocomplete=off></br>
+                                    <select size=1 class=barr name=sel>
+                                    <option selected>EURO</option>
+                                    <option>DOLAR USA</option>
+                                    <option>YUAN CHINOIS</option>
+                                    <option>LIVRE STERLING</option>
+                                    <option>DOLLAR CANADIEN</option>
+                                    </select></br>
+                                    <input type=submit id=button value=Transcrire name=tr>
+                                    </form>";
                                 
-
-                            }
-                        }   
-                    
-
-                    }
+                                    if(isset($_POST['tr']) )
+                                    {
+                                        if(isset($_POST['sel'])&& isset($_POST['m'])  )
+                                        {
+                                            $c=$_POST['ci'];
+                                            $sel=$_POST['sel'];
+                                            $quota=$l - $_POST['m'];
+                                            $mon=$_POST['m'];
+                                            if($quota>=0 && ($_POST['m'])>=0)
+                                            {
+                                                $tux=NULL;
+                                                $t = date("Y-m-d H:i:s");
+                                                //$f=$base->query("UPDATE client set quota_dispo='$q' where cin='$c' ;");
+                                                $f=$base->query("UPDATE client set ddt='$t' where cin='$c' ;");
+                                                switch($sel)
+                                                {
+                                                    
+                                                    case 'EURO':$tux= 1/3.1814 ;break;
+                                                    case 'DOLAR USA':$tux=1/2.8260;break;
+                                                    case 'YUAN CHINOIS':$tux=1/0.4075;break;
+                                                    case 'LIVRE STERLING':$tux=1/3.5932;break;
+                                                    case 'DOLLAR CANADIEN':$tux=1/2.0613;break;
+                                                    
+                                                }
+                                                //$base->query("DELETE FROM transcrire WHERE  Montant=0;");
+                                                $k=$base->query("UPDATE transcrire set Montant='$mon' ,devise='$sel',taux='$tux',date_tr='$t' WHERE N_tr=$nt-1;");
+                                                //$k=$base->query("UPDATE transcrire set taux='$tux' where cin='$c';");
+                                                //header("Refresh:0; url=gui.php");
+                                                echo "<h2 style=\"color:green;\">Transaction éffectué avec succés</h2> ";
+                                                $gg=round($tux*$mon,2);
+                                                echo "<h3 id=tit>Le montant transcrit: $gg $sel </h2> ";
+                                                $h=$base->query("SELECT * FROM client where cin='$c';");
+                                                foreach($h as $row)
+                                                {      echo"<h2 id=tit>";
+                                                    
+                                                    echo "Nouveau Quota Disponible: \"".$quota."\"</br> ";
+                                                    echo "</h2>";
+                                                }
+            
+                                            }
+                                            else
+                                            {
+                                                echo "<h2 style=\"color:red;\">Transaction échouée !</h2>";
+            
+                                            }
+                                            
+            
+                                        }
+                                    }   
+                                
+            
+                                }
                             }
                     }
 
                 }
+                $base->query("DELETE FROM transcrire WHERE  N_tr > ALL (SELECT N_tr FROM transcrire);");
                 ?>
         
             
